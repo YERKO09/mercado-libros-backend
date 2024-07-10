@@ -35,7 +35,7 @@ const getBooks = async () => {
 
     try {
 
-        const consulta = "SELECT * FROM libros"
+        const consulta = "SELECT libros.libro_id, libros.titulo, libros.autor, libros.descripcion, libros.precio, libros.editorial, libros.url_imagen, libros.anio, libros.fecha_publicacion, usuarios.nombre AS usuario, generos.nombre AS genero FROM libros INNER JOIN usuarios ON usuarios.usuario_id = libros.usuario_id INNER JOIN generos ON generos.genero_id = libros.genero_id ORDER BY libro_id"
 
         const { rows } = await database.query(consulta)
 
