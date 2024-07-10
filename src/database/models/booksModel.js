@@ -35,7 +35,7 @@ const getBooks = async () => {
 
     try {
 
-        const consulta = "SELECT * FROM libros"
+        const consulta = "SELECT libros.libro_id, libros.titulo, libros.autor, libros.descripcion, libros.precio, libros.editorial, libros.url_imagen, libros.anio, libros.fecha_publicacion, usuarios.nombre AS usuario, generos.nombre AS genero FROM libros INNER JOIN usuarios ON usuarios.usuario_id = libros.usuario_id INNER JOIN generos ON generos.genero_id = libros.genero_id ORDER BY libro_id"
 
         const { rows } = await database.query(consulta)
 
@@ -59,9 +59,38 @@ const getBooks = async () => {
     }
 }
 
+const getBookById = async (id) => {
+
+    try {
+
+        const consulta = "SELECT li.libro_id, li.titulo, li.autor, li.descripcion, li.precio, li.editorial, li.url_imagen, li.anio, li.fecha_publicacion, us.usuario_id, us.nombre AS usuario, gen.nombre AS genero FROM libros li INNER JOIN usuarios us ON us.usuario_id = li.usuario_id INNER JOIN generos gen ON gen.genero_id = li.genero_id WHERE li.libro_id = $1;"
+
+        const { rows } = await database.query(consulta, [id])
+
+        if (rows.length) {
+
+            return {
+                msg: `Libro ID: ${id}`,
+                data: rows[0]
+            }
+
+        } else {
+
+            return {
+                msg: 'Libro no encontrado',
+                data: []
+            }
+        }
+
+    } catch (error) {
+        throw error
+    }
+}
+
 const booksCollection = {
     addBook,
-    getBooks
+    getBooks,
+    getBookById
 }
 
 
