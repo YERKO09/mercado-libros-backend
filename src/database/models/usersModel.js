@@ -27,7 +27,6 @@ const addUser = async (email, password) => {
     } catch (error) {
         throw error
     }
-
 }
 
 const updateUser = async (usuario_id, nombre, apellidos, email, imagen, telefono) => {

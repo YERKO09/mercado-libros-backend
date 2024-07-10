@@ -1,13 +1,12 @@
 require('dotenv').config();
 const { Pool } = require('pg');
 
-const { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_NAME } = process.env;
+const { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_NAME, DB_STRING_URL } = process.env;
 
-const connectionString = process.env.DB_STRING_URL;
-
-const database = connectionString
+const database = DB_STRING_URL
   ? new Pool({
-        connectionString,
+        // ya que está dentro de un objeto, se asigna DB_STRING_URL en connectionString para obtener su value
+        connectionString: DB_STRING_URL,       
         ssl: {
             rejectUnauthorized: false,
         },
