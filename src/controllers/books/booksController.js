@@ -68,6 +68,6 @@ module.exports = {
     get_books_controller,
     get_book_by_id,
     add_book_controller,
-    update_book_controller,
-    delete_book_controller
+    /*update_book_controller,
+    delete_book_controller*/
 }

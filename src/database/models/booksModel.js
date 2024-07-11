@@ -134,8 +134,8 @@ const booksCollection = {
     addBook,
     getBooks,
     getBookById,
-    updateBook,
-    deleteBook
+    /*updateBook,
+    deleteBook*/
 }
 
 
