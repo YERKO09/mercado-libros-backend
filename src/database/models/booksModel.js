@@ -86,11 +86,56 @@ const getBookById = async (id) => {
         throw error
     }
 }
+/*SE AGREGA UPDATE Y DELETE MODELS*/
 
+
+/*const updateBook = async (id, titulo, autor, descripcion, precio, editorial, url_imagen, anio) => {
+    try {
+        const consulta = "UPDATE libros SET titulo = $1, autor = $2, descripcion = $3, precio = $4, editorial = $5, url_imagen = $6, anio = $7 WHERE libro_id = $8 RETURNING *";
+        const values = [titulo, autor, descripcion, precio, editorial, url_imagen, anio, id];
+        const result = await database.query(consulta, values);
+        if (result.rowCount) {
+            return {
+                msg: 'Libro actualizado correctamente',
+                data: result.rows[0]
+            };
+        } else {
+            return {
+                msg: 'Libro no actualizado',
+                data: []
+            };
+        }
+    } catch (error) {
+        throw error;
+    }
+};
+
+const deleteBook = async (id) => {
+    try {
+        const consulta = "DELETE FROM libros WHERE libro_id = $1 RETURNING *";
+        const result = await database.query(consulta, [id]);
+        if (result.rowCount) {
+            return {
+                msg: 'Libro eliminado correctamente',
+                data: result.rows[0]
+            };
+        } else {
+            return {
+                msg: 'Libro no encontrado',
+                data: []
+            };
+        }
+    } catch (error) {
+        throw error;
+    }
+};
+*/
 const booksCollection = {
     addBook,
     getBooks,
-    getBookById
+    getBookById,
+    updateBook,
+    deleteBook
 }
 
 
