@@ -1,5 +1,9 @@
 const { UsersCollection } = require('../../database/models/usersModel')
 
+const get_user_controller = async (req, res, next) => {
+    const users = await UsersCollection.getUsers()
+    res.json(users)
+}
 
 const add_user_controller = async (req, res, next) => {
 
@@ -46,5 +50,6 @@ const delete_user_controller = async (req, res, next) => {
 module.exports = {
     update_user_controller,
     delete_user_controller,
-    add_user_controller
+    add_user_controller,
+    get_user_controller
 }

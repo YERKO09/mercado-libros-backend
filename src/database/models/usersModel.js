@@ -1,5 +1,11 @@
 const database = require('../dbConfig');
 
+const getUsers = async () => {
+    const query = "SELECT * FROM usuarios;"
+    const {rows} = await database.query(query);
+    // console.log('Rows:', rows);   
+    return rows
+}
 
 const addUser = async (nombre, email, password) => {
 
@@ -109,7 +115,8 @@ const deleteUser = async (usuario_id) => {
 const UsersCollection = {
     updateUser,
     deleteUser,
-    addUser
+    addUser,
+    getUsers
 }
 
 

@@ -1,2 +1,16 @@
 GET http://localhost:3000/api/libros/get-all
 Content-Type: application/json
+
+###
+GET http://localhost:3000/api/usuarios
+Content-Type: application/json
+
+###
+POST http://localhost:3000/api/usuarios/create
+Content-Type: application/json
+
+{ 
+    "nombre": "admin",
+    "email": "admin@correo.com",
+    "password": "admin"
+}
