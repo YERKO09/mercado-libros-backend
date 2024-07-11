@@ -1,12 +1,12 @@
 const database = require('../dbConfig');
 
 
-const addUser = async (email, password) => {
+const addUser = async (nombre, email, password) => {
 
     try {
 
-        const consulta = "INSERT INTO usuarios (email, password) values ($1, $2) RETURNING *"
-        const values = [email, password]
+        const consulta = "INSERT INTO usuarios (nombre, email, password) values ($1, $2, $3) RETURNING *"
+        const values = [nombre, email, password]
 
         const result = await database.query(consulta, values)
 
