@@ -4,8 +4,8 @@ const { UsersCollection } = require('../../database/models/usersModel')
 const add_user_controller = async (req, res, next) => {
 
     try {
-        const { email, password } = req.body
-        const response = await UsersCollection.addUser(email, password)
+        const { nombre, email, password } = req.body
+        const response = await UsersCollection.addUser(nombre, email, password)
 
         res.send(response)
 

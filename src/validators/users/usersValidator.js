@@ -15,31 +15,14 @@ const updateValidator = [
     }
 ]
 
-/**
- * nombre
- * apellidos
- * telefono
- * email 
- * imagen
- */
-
 const addValidator = [
 
-    body('telefono')
-        .notEmpty().withMessage('Debes ingresar un telefono')
-        .isInt().withMessage('Debe ser entero'),
-
-    // body('role')
-    //     .notEmpty().withMessage('Agrega el Role')
-    //     .isIn(['admin', 'guest', 'customer'])
-    //     .withMessage('Debe ser un rol correcto')
-    // ,
-
     body('nombre')
-        .notEmpty().withMessage('Agrega el Nombre de usuario'),
-    body('apellidos')
-        .notEmpty().withMessage('Agrega los apellidos'),
-    body('email').notEmpty().withMessage('Agrega Tu email').isEmail().withMessage('Formato Incorrecto'),
+        .notEmpty().withMessage('Ingresa tu nombre'),
+    body('email')
+        .notEmpty().withMessage('Agrega tu email').isEmail().withMessage('Formato Incorrecto'),
+    body('password')
+        .notEmpty().withMessage('Ingresa una contraseña'),
 
     (req, res, next) => {
 

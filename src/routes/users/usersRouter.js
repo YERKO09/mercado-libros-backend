@@ -1,5 +1,5 @@
 const { add_user_controller, update_user_controller } = require('../../controllers/users/usersController')
-const { UsersValidatorCollection } = require('../../validators/users/usersValidotor')
+const { UsersValidatorCollection } = require('../../validators/users/usersValidator')
 
 const router = require('express').Router()
 
