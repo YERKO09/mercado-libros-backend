@@ -14,3 +14,17 @@ Content-Type: application/json
     "email": "admin@correo.com",
     "password": "admin"
 }
+
+###
+PUT http://localhost:3000/api/libros/update/1
+Content-Type: application/json
+
+{ 
+    "titulo": "La Biblia",
+    "autor": "Jesús",
+    "precio": "0"
+}
+
+###
+DELETE http://localhost:3000/api/libros/delete/1
+Content-Type: application/json

@@ -1,6 +1,6 @@
 const { booksCollection } = require('../../database/models/booksModel')
 
-const add_book_controller = async (req, res, next) => {
+const add_book_controller = async (req, res) => {
 
     try {
         const { titulo, autor, descripcion, precio, editorial, url_imagen, anio } = req.body
@@ -10,12 +10,12 @@ const add_book_controller = async (req, res, next) => {
         res.send(response)
 
     } catch (error) {
-        next(error)
+        res.send(error)
     }
 }
 
 
-const get_books_controller = async (req, res, next) => {
+const get_books_controller = async (req, res) => {
 
     try {
         const response = await booksCollection.getBooks()
@@ -23,11 +23,11 @@ const get_books_controller = async (req, res, next) => {
         res.send(response)
 
     } catch (error) {
-        next(error)
+        res.send(error)
     }
 }
 
-const get_book_by_id = async (req, res, next) => {
+const get_book_by_id = async (req, res) => {
     const {id} = req.params
 
     try {
@@ -36,38 +36,36 @@ const get_book_by_id = async (req, res, next) => {
         res.send(response)
 
     } catch (error) {
-        next(error)
+        res.send(error)
     }
 }
-/*SE AGREGA UPDATE Y DELETE CONTROLLERS*/
 
-/* 
-const update_book_controller = async (req, res, next) => {
+const update_book_controller = async (req, res) => {
     const { id } = req.params;
     const { titulo, autor, descripcion, precio, editorial, url_imagen, anio } = req.body;
     try {
         const response = await booksCollection.updateBook(id, titulo, autor, descripcion, precio, editorial, url_imagen, anio);
         res.send(response);
     } catch (error) {
-        next(error);
+        res.send(error)
     }
 };
 
-const delete_book_controller = async (req, res, next) => {
+const delete_book_controller = async (req, res) => {
     const { id } = req.params;
     try {
         const response = await booksCollection.deleteBook(id);
         res.send(response);
     } catch (error) {
-        next(error);
+        res.send(error)
     }
 };
-*/
+
 
 module.exports = {
     get_books_controller,
     get_book_by_id,
     add_book_controller,
-    /*update_book_controller,
-    delete_book_controller*/
+    update_book_controller,
+    delete_book_controller
 }

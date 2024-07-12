@@ -14,7 +14,7 @@ const add_user_controller = async (req, res, next) => {
         res.send(response)
 
     } catch (error) {
-        next(error)
+        res.send(error)
     }
 }
 
@@ -29,7 +29,7 @@ const update_user_controller = async (req, res, next) => {
         res.json(response)
 
     } catch (error) {
-        next(error)
+        res.send(error)
     }
 }
 
@@ -42,7 +42,7 @@ const delete_user_controller = async (req, res, next) => {
         res.json(response)
 
     } catch (error) {
-        next(error)
+        res.send(error)
     }
 }
 

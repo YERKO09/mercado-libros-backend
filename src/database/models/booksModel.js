@@ -86,10 +86,8 @@ const getBookById = async (id) => {
         throw error
     }
 }
-/*SE AGREGA UPDATE Y DELETE MODELS*/
 
-
-/*const updateBook = async (id, titulo, autor, descripcion, precio, editorial, url_imagen, anio) => {
+const updateBook = async (id, titulo, autor, descripcion, precio, editorial, url_imagen, anio) => {
     try {
         const consulta = "UPDATE libros SET titulo = $1, autor = $2, descripcion = $3, precio = $4, editorial = $5, url_imagen = $6, anio = $7 WHERE libro_id = $8 RETURNING *";
         const values = [titulo, autor, descripcion, precio, editorial, url_imagen, anio, id];
@@ -129,13 +127,13 @@ const deleteBook = async (id) => {
         throw error;
     }
 };
-*/
+
 const booksCollection = {
     addBook,
     getBooks,
     getBookById,
-    /*updateBook,
-    deleteBook*/
+    updateBook,
+    deleteBook
 }
 
 
