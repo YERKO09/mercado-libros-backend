@@ -1,4 +1,23 @@
 const database = require('../dbConfig');
+const bcrypt = require('bcrypt')
+
+const verificarCredenciales = async ( email, password ) => {
+
+    const consulta = "SELECT * FROM usuarios WHERE email = $1;"
+    const values = [email]
+    const { rowCount, rows } = await database.query(consulta, values)
+    
+    const usuario = rows[0]
+  // console.log(usuario);
+  
+    const match = await bcrypt.compare(String(password), usuario.password)
+    // console.log(String(password), usuario.password);
+    // console.log('match:',match);
+    
+    if ( !match || !rowCount)
+        throw { code: 401, message: "Error de credenciales" }
+}
+
 
 const getUsers = async () => {
     const query = "SELECT * FROM usuarios;"
@@ -10,9 +29,12 @@ const getUsers = async () => {
 const addUser = async (nombre, email, password) => {
 
     try {
-
+        // 2° parámetro saltos = ciclos que hará el hash para encriptar la contraseña
+        const passwordEncriptada = await bcrypt.hash(String(password), 10)
+        console.log("PW ENCRIPTADA ➡️   ", passwordEncriptada);
+        password = passwordEncriptada
         const consulta = "INSERT INTO usuarios (nombre, email, password) values ($1, $2, $3) RETURNING *"
-        const values = [nombre, email, password]
+        const values = [nombre, email, passwordEncriptada]
 
         const result = await database.query(consulta, values)
 
@@ -34,6 +56,7 @@ const addUser = async (nombre, email, password) => {
         throw error
     }
 }
+
 
 const updateUser = async (usuario_id, nombre, apellidos, email, imagen, telefono) => {
 
@@ -116,7 +139,8 @@ const UsersCollection = {
     updateUser,
     deleteUser,
     addUser,
-    getUsers
+    getUsers,
+    verificarCredenciales
 }
 
 

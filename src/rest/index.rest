@@ -10,21 +10,30 @@ POST http://localhost:3000/api/usuarios/create
 Content-Type: application/json
 
 { 
-    "nombre": "admin",
-    "email": "admin@correo.com",
-    "password": "admin"
+    "nombre": "admin3",
+    "email": "admin3@correo.com",
+    "password": "1234"
 }
 
 ###
-PUT http://localhost:3000/api/libros/update/1
+PUT http://localhost:3000/api/libros/update/2
 Content-Type: application/json
 
 { 
-    "titulo": "La Biblia",
-    "autor": "Jesús",
-    "precio": "0"
+    "precio": 18000,
+    "editorial": "ZIG - ZAG"
 }
 
 ###
 DELETE http://localhost:3000/api/libros/delete/1
 Content-Type: application/json
+
+###POST LOGIN
+POST http://127.0.0.1:3000/api/login
+Content-Type: application/json
+
+{
+    "email": "admin3@correo.com",
+    "password": "1234"
+}
+
