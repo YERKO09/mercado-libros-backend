@@ -89,7 +89,18 @@ const getBookById = async (id) => {
 
 const updateBook = async (id, titulo, autor, descripcion, precio, editorial, url_imagen, anio) => {
     try {
-        const consulta = "UPDATE libros SET titulo = $1, autor = $2, descripcion = $3, precio = $4, editorial = $5, url_imagen = $6, anio = $7 WHERE libro_id = $8 RETURNING *";
+        const consulta =  `
+        UPDATE libros 
+        SET 
+            titulo = COALESCE($1, titulo), 
+            autor = COALESCE($2, autor), 
+            descripcion = COALESCE($3, descripcion), 
+            precio = COALESCE($4, precio), 
+            editorial = COALESCE($5, editorial), 
+            url_imagen = COALESCE($6, url_imagen), 
+            anio = COALESCE($7, anio) 
+        WHERE libro_id = $8 
+        RETURNING *`;
         const values = [titulo, autor, descripcion, precio, editorial, url_imagen, anio, id];
         const result = await database.query(consulta, values);
         if (result.rowCount) {
