@@ -3,6 +3,6 @@ const BooksRouter = require('./books/booksRouter')
 const UsersRouter = require('./users/usersRouter')
 
 router.use('/libros', BooksRouter)
-router.use(UsersRouter)
+router.use('/usuarios', UsersRouter)
 
 module.exports = router

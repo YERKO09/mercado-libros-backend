@@ -4,7 +4,7 @@ const { UsersValidatorCollection } = require('../../validators/users/usersValida
 const router = require('express').Router()
 
 
-router.get('/usuarios', get_user_controller)
+router.get('/get', get_user_controller)
 router.post('/create', UsersValidatorCollection.addValidator, add_user_controller)
 
 router.put('/update/:id', UsersValidatorCollection.updateValidator, update_user_controller)
