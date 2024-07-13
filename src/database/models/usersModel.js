@@ -15,7 +15,7 @@ const verificarCredenciales = async ( email, password ) => {
     // console.log('match:',match);
     
     if ( !match || !rowCount)
-        throw { code: 401, message: "Error de credenciales" }
+        throw { error: true, code: 401, message: "Credenciales inválidas" }
 }
 
 
