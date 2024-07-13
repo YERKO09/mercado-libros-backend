@@ -1,11 +1,11 @@
 const { UsersCollection } = require('../../database/models/usersModel')
 
-const get_user_controller = async (req, res, next) => {
+const get_user_controller = async (req, res) => {
     const users = await UsersCollection.getUsers()
     res.json(users)
 }
 
-const add_user_controller = async (req, res, next) => {
+const add_user_controller = async (req, res) => {
 
     try {
         const { nombre, email, password } = req.body
@@ -18,7 +18,7 @@ const add_user_controller = async (req, res, next) => {
     }
 }
 
-const update_user_controller = async (req, res, next) => {
+const update_user_controller = async (req, res) => {
     try {
 
         const { usuario_id } = req.params;
@@ -33,7 +33,7 @@ const update_user_controller = async (req, res, next) => {
     }
 }
 
-const delete_user_controller = async (req, res, next) => {
+const delete_user_controller = async (req, res) => {
     try {
 
         const { usuario_id } = req.params;
