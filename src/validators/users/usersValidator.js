@@ -37,10 +37,33 @@ const addValidator = [
     }
 ]
 
+const loginValidator = [
+
+    body('email')
+        .notEmpty().withMessage('Agrega tu email')
+        .isEmail().withMessage('Formato de email Incorrecto'),
+    body('password')
+        .notEmpty().withMessage('Ingresa una contraseña'),
+
+    (req, res, next) => {
+
+        const errors = validationResult(req).mapped()
+        console.log(errors);
+
+        if (Object.keys(errors).length) {
+            res.status(400).send(errors)
+        } else {
+            next()
+        }
+
+    }
+]
+
 
 const UsersValidatorCollection = {
     updateValidator,
-    addValidator
+    addValidator,
+    loginValidator
 }
 
 
