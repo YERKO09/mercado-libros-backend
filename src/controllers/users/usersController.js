@@ -1,8 +1,20 @@
 const { UsersCollection } = require('../../database/models/usersModel')
 
-const get_user_controller = async (req, res) => {
+const get_users_controller = async (req, res) => {
     const users = await UsersCollection.getUsers()
     res.json(users)
+}
+
+const get_user_data_controller = async (req, res) => {
+    try {
+        const {email} = req.user //extraido del token desde middleware Authorization
+        const dataUsuario = await UsersCollection.getUserByEmail(email)
+
+        console.log(dataUsuario);
+        res.status(200).send(dataUsuario)
+    } catch (error) {
+        res.send(error)
+    }
 }
 
 const add_user_controller = async (req, res) => {
@@ -14,7 +26,7 @@ const add_user_controller = async (req, res) => {
         res.send(response)
 
     } catch (error) {
-        res.send(error)
+        res.status(error.status).send(error)
     }
 }
 
@@ -48,8 +60,10 @@ const delete_user_controller = async (req, res) => {
 
 
 module.exports = {
+    get_users_controller,
+    get_user_data_controller,
+    get_users_controller,
     update_user_controller,
     delete_user_controller,
-    add_user_controller,
-    get_user_controller
+    add_user_controller
 }
