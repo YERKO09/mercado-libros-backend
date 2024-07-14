@@ -20,6 +20,23 @@ const getUsers = async () => {
     const query = "SELECT * FROM usuarios;"
     const {rows} = await database.query(query);
     // console.log('Rows:', rows);   
+
+    if (rows.length) {
+
+        return {
+            msg: 'Todos los usuarios',
+            data: rows
+        }
+
+    } else {
+
+        return {
+            msg: 'No hay usuarios',
+            data: []
+        }
+    }
+}
+
     return rows
 }
 
