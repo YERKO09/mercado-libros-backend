@@ -8,7 +8,6 @@ const loginController = async (req, res) => {
   try {
     const { email, password } = req.body;
     await UsersCollection.verificarCredenciales(email, password);
-    console.log("SECRET🔑  ➡️   ", secretKey);
 
     const token = jwt.sign({ email }, secretKey);
     console.log("TOKEN 🔐  ➡️   ",   token);
