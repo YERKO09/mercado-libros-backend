@@ -53,6 +53,7 @@ const addUser = async (nombre, email, password) => {
         err.error = true
         err.msg = 'Bad Request'
         err.status = '400'
+        err.status = 400
         err.origin = 'Database'
         err.model = 'usuarios'
 

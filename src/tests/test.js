@@ -1,5 +1,4 @@
 const request = require('supertest');
-// const app = require('../src/app');
 const server = require("../../index");
 
 describe('Testing Mercadolibros', () => {
@@ -31,10 +30,10 @@ it('Debería obtener todos los libros', async () => {
 
 
   it('Debería obtener los datos del usuario', async () => {
-    const response = await request(server).get('/api/usuarios/get');
+    const response = await request(server).get('/api/usuarios/get-all');
     expect(response.status).toBe(200);
     expect(response.body).toBeInstanceOf(Object);
-    // expect(response.body).toHaveProperty('msg', 'Todos los usuarios');
+    expect(response.body).toHaveProperty('msg', 'Todos los usuarios');
     expect(response.body).toHaveProperty('data');
     expect(response.body.data).toBeInstanceOf(Array);
     if (response.body.data.length > 0) {
@@ -56,9 +55,9 @@ it('Debería obtener todos los libros', async () => {
         email: 'patana@correo.cl',
         password: '1234'
       });
-    expect(response.status).toBe(400); // No se si estara bien el (400)
+    expect(response.status).toBe(400);
     expect(response.body).toBeInstanceOf(Object);
-    expect(response.body).toHaveProperty('error', 'El email ya está en uso');
+    expect(response.body).toHaveProperty('msg', 'El correo ya se encuentra registrado');
   });
 
 

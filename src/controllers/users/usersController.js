@@ -15,6 +15,7 @@ const add_user_controller = async (req, res) => {
 
     } catch (error) {
         res.send(error)
+        res.status(error.status).send(error)
     }
 }
 
