@@ -19,7 +19,6 @@ const verificarCredenciales = async ( email, password ) => {
 const getUsers = async () => {
     const query = "SELECT * FROM usuarios;"
     const {rows} = await database.query(query);
-    // console.log('Rows:', rows);   
 
     if (rows.length) {
 
@@ -36,6 +35,16 @@ const getUsers = async () => {
         }
     }
 }
+
+const getUserByEmail = async (email) => {
+    const consulta = "SELECT nombre, apellidos, email, telefono, imagen FROM usuarios WHERE email = $1"
+    const values = [email]
+
+    const {rowCount, rows} = await database.query(consulta, values)
+
+    if(!rowCount){
+        throw {code: 404, message: "Usuario no encontrado"}
+    }
 
     return rows
 }
@@ -69,7 +78,6 @@ const addUser = async (nombre, email, password) => {
 
         err.error = true
         err.msg = 'Bad Request'
-        err.status = '400'
         err.status = 400
         err.origin = 'Database'
         err.model = 'usuarios'
@@ -165,6 +173,7 @@ const UsersCollection = {
     deleteUser,
     addUser,
     getUsers,
+    getUserByEmail,
     verificarCredenciales
 }
 
