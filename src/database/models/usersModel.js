@@ -8,12 +8,9 @@ const verificarCredenciales = async ( email, password ) => {
     const { rowCount, rows } = await database.query(consulta, values)
     
     const usuario = rows[0]
-  // console.log(usuario);
   
     const match = await bcrypt.compare(String(password), usuario.password)
-    // console.log(String(password), usuario.password);
-    // console.log('match:',match);
-    
+
     if ( !match || !rowCount)
         throw { error: true, code: 401, message: "Credenciales inválidas" }
 }
@@ -29,10 +26,8 @@ const getUsers = async () => {
 const addUser = async (nombre, email, password) => {
 
     try {
-        // 2° parámetro saltos = ciclos que hará el hash para encriptar la contraseña
+        // 2° parámetro salts = ciclos que hará el hash para encriptar la contraseña
         const passwordEncriptada = await bcrypt.hash(String(password), 10)
-        console.log("PW ENCRIPTADA ➡️   ", passwordEncriptada);
-        password = passwordEncriptada
         const consulta = "INSERT INTO usuarios (nombre, email, password) values ($1, $2, $3) RETURNING *"
         const values = [nombre, email, passwordEncriptada]
 
@@ -53,7 +48,19 @@ const addUser = async (nombre, email, password) => {
         }
 
     } catch (error) {
-        throw error
+        const err = new Error('Error al registrar usuario');
+
+        err.error = true
+        err.msg = 'Bad Request'
+        err.status = '400'
+        err.origin = 'Database'
+        err.model = 'usuarios'
+
+        if(error.code == 23505){
+            err.msg = "El correo ya se encuentra registrado"
+        }
+
+        throw err;
     }
 }
 
