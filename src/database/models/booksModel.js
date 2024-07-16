@@ -1,12 +1,13 @@
 const database = require('../dbConfig')
 
 
-const addBook = async (titulo, autor, descripcion, precio, editorial, url_imagen, anio) => {
+const addBook = async (nuevoLibro) => {
 
     try {
+        const {usuario, titulo, autor, descripcion, genero, precio, editorial, url_imagen, anio} = nuevoLibro
 
-        const consulta = "INSERT INTO libros (titulo, autor, descripcion, precio, editorial, url_imagen, anio) values ($1, $2, $3, $4, $5, $6, $7) RETURNING *"
-        const values = [titulo, autor, descripcion, precio, editorial, url_imagen, anio]
+        const consulta = "INSERT INTO libros (usuario_id, titulo, autor, descripcion, genero_id, precio, editorial, url_imagen, anio) values ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *"
+        const values = [usuario, titulo, autor, descripcion, genero, precio, editorial, url_imagen, anio]
 
         const result = await database.query(consulta, values)
 
@@ -87,6 +88,37 @@ const getBookById = async (id) => {
     }
 }
 
+const getGeneros = async () => {
+
+    try {
+
+        console.log('consulta')
+        const consulta = "SELECT * FROM generos"
+
+        const { rows } = await database.query(consulta)
+
+
+        if (rows.length) {
+
+            return {
+                msg: 'Todos los generos',
+                data: rows
+            }
+
+        } else {
+
+            return {
+                msg: 'No hay generos',
+                data: []
+            }
+        }
+
+    } catch (error) {
+        throw error
+    }
+
+}
+
 const updateBook = async (id, titulo, autor, descripcion, precio, editorial, url_imagen, anio) => {
     try {
         const consulta =  `
@@ -143,6 +175,7 @@ const booksCollection = {
     addBook,
     getBooks,
     getBookById,
+    getGeneros,
     updateBook,
     deleteBook
 }

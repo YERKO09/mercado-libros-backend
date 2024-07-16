@@ -37,7 +37,7 @@ const getUsers = async () => {
 }
 
 const getUserByEmail = async (email) => {
-    const consulta = "SELECT nombre, apellidos, email, telefono, imagen FROM usuarios WHERE email = $1"
+    const consulta = "SELECT usuario_id, nombre, apellidos, email, telefono, imagen FROM usuarios WHERE email = $1"
     const values = [email]
 
     const {rowCount, rows} = await database.query(consulta, values)
