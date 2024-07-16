@@ -14,7 +14,7 @@ const addBook = async (nuevoLibro) => {
         if (result.rowCount) {
 
             return {
-                msg: 'Libro agregado correctamente',
+                msg: 'Libro agregado correctamente ✅',
                 data: result.rows[0]
             }
 
