@@ -87,6 +87,37 @@ const getBookById = async (id) => {
     }
 }
 
+const getGeneros = async () => {
+
+    try {
+
+        console.log('consulta')
+        const consulta = "SELECT * FROM generos"
+
+        const { rows } = await database.query(consulta)
+
+
+        if (rows.length) {
+
+            return {
+                msg: 'Todos los generos',
+                data: rows
+            }
+
+        } else {
+
+            return {
+                msg: 'No hay generos',
+                data: []
+            }
+        }
+
+    } catch (error) {
+        throw error
+    }
+
+}
+
 const updateBook = async (id, titulo, autor, descripcion, precio, editorial, url_imagen, anio) => {
     try {
         const consulta =  `
@@ -143,6 +174,7 @@ const booksCollection = {
     addBook,
     getBooks,
     getBookById,
+    getGeneros,
     updateBook,
     deleteBook
 }

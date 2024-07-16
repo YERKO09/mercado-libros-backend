@@ -10,7 +10,6 @@ const get_user_data_controller = async (req, res) => {
         const {email} = req.user //extraido del token desde middleware Authorization
         const dataUsuario = await UsersCollection.getUserByEmail(email)
 
-        console.log(dataUsuario);
         res.status(200).send(dataUsuario)
     } catch (error) {
         res.send(error)
