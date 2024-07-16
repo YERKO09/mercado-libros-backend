@@ -3,9 +3,9 @@ const { booksCollection } = require('../../database/models/booksModel')
 const add_book_controller = async (req, res) => {
 
     try {
-        const { titulo, autor, descripcion, precio, editorial, url_imagen, anio } = req.body
+        const nuevoLibro = req.body
 
-        const response = await booksCollection.addBook(titulo, autor, descripcion, precio, editorial, url_imagen, anio)
+        const response = await booksCollection.addBook(nuevoLibro)
 
         res.send(response)
 
