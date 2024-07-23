@@ -32,13 +32,64 @@ const getFavoritesByUserEmail = async (email) => {
   }
 }
 
-// const addFavorite
-// const deleteFavorite
+const addFavorite = async (usuario, libro) => {
+  try {
+    const consulta = `
+      INSERT INTO 
+        favoritos (usuario_id, libro_id)
+      VALUES 
+        ($1, $2)
+      RETURNING *
+    `
+    const values = [usuario, libro]
+  
+    const { rows } = await database.query(consulta, values)
+  
+    if(rows.length){
+      return {
+        msg: `Se agrego libro ID:${libro} a favoritos`,
+        data: rows
+      }
+    } else {
+      return {msg: "No se agregó a favoritos"}
+    }
+  } catch (error) {
+    throw error
+  }
+
+}
+
+const removeFavorite = async (usuario, libro) => {
+  try {
+    const consulta = `
+      DELETE FROM
+        favoritos
+      WHERE
+        usuario_id = $1 AND libro_id = $2
+      RETURNING *
+    `
+    const values = [usuario, libro]
+  
+    const { rows } = await database.query(consulta, values)
+  
+    if(rows.length){
+      return {
+        msg: `Se quitó libro ID:${libro} de favoritos`,
+        data: rows
+      }
+    } else {
+      return {msg: "No se pudo quitar de favoritos"}
+    }
+  } catch (error) {
+    throw error
+  }
+
+}
 
 const favoritesCollection = {
   getFavoritesByUserEmail,
-  /* addFavorite,
-  deleteFavorite */
+  addFavorite,
+  removeFavorite 
 }
 
 module.exports = { favoritesCollection }
