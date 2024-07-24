@@ -1,5 +1,18 @@
 const { booksCollection } = require('../../database/models/booksModel')
 
+const get_books_by_user = async (req, res) => {
+
+    try {
+        const {email} = req.user
+        const response = await booksCollection.getBooksByUser(email)
+        res.send(response)
+
+    } catch (error) {   
+        console.log('ERROR', error);                  
+        res.send(error)
+    }
+};
+
 const add_book_controller = async (req, res) => {
 
     try {
@@ -81,5 +94,6 @@ module.exports = {
     get_generos_controller,
     add_book_controller,
     update_book_controller,
-    delete_book_controller
+    delete_book_controller,
+    get_books_by_user
 }

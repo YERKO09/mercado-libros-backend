@@ -36,7 +36,7 @@ const getBooks = async () => {
 
     try {
 
-        const consulta = "SELECT libros.libro_id, libros.titulo, libros.autor, libros.descripcion, libros.precio, libros.editorial, libros.url_imagen, libros.anio, libros.fecha_publicacion, usuarios.nombre AS usuario, generos.nombre AS genero FROM libros INNER JOIN usuarios ON usuarios.usuario_id = libros.usuario_id INNER JOIN generos ON generos.genero_id = libros.genero_id ORDER BY libro_id"
+        const consulta = "SELECT l.libro_id, l.titulo, l.autor, l.descripcion, l.precio, l.editorial, l.url_imagen, l.anio, l.fecha_publicacion, u.nombre AS usuario, g.nombre AS genero FROM libros l INNER JOIN usuarios u ON u.usuario_id = l.usuario_id INNER JOIN generos g ON g.genero_id = l.genero_id ORDER BY l.libro_id"
 
         const { rows } = await database.query(consulta)
 
@@ -171,13 +171,47 @@ const deleteBook = async (id) => {
     }
 };
 
+const getBooksByUser = async (email) => {
+    try {
+        const consulta = `
+        SELECT l.libro_id, l.titulo, l.autor, l.descripcion, l.precio, l.editorial, l.url_imagen, l.anio, l.fecha_publicacion, u.nombre AS usuario, g.nombre AS genero 
+        FROM libros l 
+        INNER JOIN usuarios u ON u.usuario_id = l.usuario_id 
+        INNER JOIN generos g ON g.genero_id = l.genero_id 
+        WHERE u.email = $1
+        ORDER BY l.libro_id`;
+
+        const { rows } = await database.query(consulta, [email]);
+
+        console.log('rows', rows);
+        
+        
+        if (rows.length) {
+            return {
+                msg: `Libros del usuario con email: ${email}`,
+                data: rows
+            };
+        } else {
+            return {
+                msg: 'No hay libros para este usuario',
+                data: []
+            };
+        }
+    } catch (error) {
+
+        throw error;
+    }
+};
+
+
 const booksCollection = {
     addBook,
     getBooks,
     getBookById,
     getGeneros,
     updateBook,
-    deleteBook
+    deleteBook,
+    getBooksByUser
 }
 
 
