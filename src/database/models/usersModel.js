@@ -91,12 +91,12 @@ const addUser = async (nombre, email, password) => {
 }
 
 
-const updateUser = async (usuario_id, nombre, apellidos, email, imagen, telefono) => {
+const updateUser = async (usuario_id, nombre, apellidos, imagen, telefono) => {
 
     try {
 
-        const consulta = "UPDATE usuarios SET nombre = $1, apellidos = $2, email = $3, imagen = $4, telefono = $5 WHERE usuario_id = $6 RETURNING *";
-        const values = [nombre, apellidos, email, imagen, telefono, usuario_id]
+        const consulta = "UPDATE usuarios SET nombre = $1, apellidos = $2, imagen = $3, telefono = $4 WHERE usuario_id = $5 RETURNING *";
+        const values = [nombre, apellidos, imagen, telefono, usuario_id]
 
         const result = await database.query(consulta, values)
 
