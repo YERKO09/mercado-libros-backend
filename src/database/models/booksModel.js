@@ -182,9 +182,6 @@ const getBooksByUser = async (email) => {
         ORDER BY l.libro_id`;
 
         const { rows } = await database.query(consulta, [email]);
-
-        console.log('rows', rows);
-        
         
         if (rows.length) {
             return {

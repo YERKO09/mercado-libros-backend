@@ -9,7 +9,7 @@ router.get('/get-all', get_users_controller)
 router.get('/get', validarToken, get_user_data_controller)
 router.post('/create', UsersValidatorCollection.addValidator, add_user_controller)
 
-router.put('/update/:id', UsersValidatorCollection.updateValidator, update_user_controller)
+router.put('/update/:usuario_id', UsersValidatorCollection.updateValidator, update_user_controller)
 router.delete('/delete/:id', () => { })
 
 

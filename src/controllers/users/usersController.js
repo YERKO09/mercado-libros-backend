@@ -33,9 +33,9 @@ const update_user_controller = async (req, res) => {
     try {
 
         const { usuario_id } = req.params;
-        const { nombre, apellidos, email, imagen, telefono} = req.body
+        const { nombre, apellidos, imagen, telefono} = req.body
 
-        const response = await UsersCollection.updateUser(usuario_id, nombre, apellidos, email, imagen, telefono)
+        const response = await UsersCollection.updateUser(usuario_id, nombre, apellidos, imagen, telefono)
 
         res.json(response)
 
