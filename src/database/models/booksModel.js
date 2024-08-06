@@ -119,7 +119,7 @@ const getGeneros = async () => {
 
 }
 
-const updateBook = async (id, titulo, autor, descripcion, precio, editorial, url_imagen, anio) => {
+const updateBook = async (id, titulo, autor, descripcion, precio, editorial, url_imagen, anio, genero_id) => {
     try {
         const consulta =  `
         UPDATE libros 
@@ -130,10 +130,11 @@ const updateBook = async (id, titulo, autor, descripcion, precio, editorial, url
             precio = COALESCE($4, precio), 
             editorial = COALESCE($5, editorial), 
             url_imagen = COALESCE($6, url_imagen), 
-            anio = COALESCE($7, anio) 
-        WHERE libro_id = $8 
+            anio = COALESCE($7, anio),
+            genero_id = COALESCE($8, genero_id) 
+        WHERE libro_id = $9 
         RETURNING *`;
-        const values = [titulo, autor, descripcion, precio, editorial, url_imagen, anio, id];
+        const values = [titulo, autor, descripcion, precio, editorial, url_imagen, anio, genero_id, id];
         const result = await database.query(consulta, values);
         if (result.rowCount) {
             return {
@@ -150,6 +151,7 @@ const updateBook = async (id, titulo, autor, descripcion, precio, editorial, url
         throw error;
     }
 };
+
 
 const deleteBook = async (id) => {
     try {

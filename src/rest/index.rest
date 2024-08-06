@@ -1,4 +1,4 @@
-GET http://localhost:3000/api/libros/get-all
+GET http://localhost:3000/api/libros/get/2
 Content-Type: application/json
 
 ###
@@ -21,11 +21,11 @@ Content-Type: application/json
 
 { 
     "precio": 18000,
-    "editorial": "ZIG - ZAG"
+    "genero_id": "6",
 }
 
 ###
-DELETE http://localhost:3000/api/libros/delete/1
+DELETE http://localhost:3000/api/libros/delete/38
 Content-Type: application/json
 
 ###POST LOGIN

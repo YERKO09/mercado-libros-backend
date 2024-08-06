@@ -68,14 +68,15 @@ const get_generos_controller = async (req, res) => {
 
 const update_book_controller = async (req, res) => {
     const { id } = req.params;
-    const { titulo, autor, descripcion, precio, editorial, url_imagen, anio } = req.body;
+    const { titulo, autor, descripcion, precio, editorial, url_imagen, anio, genero_id } = req.body;
     try {
-        const response = await booksCollection.updateBook(id, titulo, autor, descripcion, precio, editorial, url_imagen, anio);
+        const response = await booksCollection.updateBook(id, titulo, autor, descripcion, precio, editorial, url_imagen, anio, genero_id);
         res.send(response);
     } catch (error) {
-        res.send(error)
+        res.send(error);
     }
 };
+
 
 const delete_book_controller = async (req, res) => {
     const { id } = req.params;
