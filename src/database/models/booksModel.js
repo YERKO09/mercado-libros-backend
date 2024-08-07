@@ -49,6 +49,7 @@ const getBooks = async () => {
             l.fecha_publicacion, 
             u.nombre AS usuario, 
             u.imagen AS avatar_usuario,
+            u.usuario_id,
             g.nombre AS genero 
         FROM 
             libros l 
